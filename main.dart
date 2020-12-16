@@ -1,81 +1,131 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'
+    show
+        AppBar,
+        BuildContext,
+        Center,
+        Colors,
+        Column,
+        EdgeInsets,
+        Icons,
+        Key,
+        MainAxisAlignment,
+        MaterialApp,
+        Padding,
+        Scaffold,
+        State,
+        StatefulWidget,
+        StatelessWidget,
+        Text,
+        Widget,
+        runApp;
+import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 
-import './quiz.dart';
-import './quiz1.dart';
-import './result.dart';
-
-void main() => runApp(MyApp());
-
-class MyApp extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return _MyAppState();
-  }
+void main() {
+  runApp(MyApp());
 }
 
-class _MyAppState extends State<MyApp> {
-  final _questions = const [
-    {
-      'questionText': 'How can a computer understand the numerical?',
-      'answers': [
-        {'text': 'Hex', 'score': 1},
-        {'text': 'Binary', 'score': 10},
-      ],
-    },
-    {
-      'questionText': 'Find the Matching Sequence?',
-      'answers': [
-        {'text': '22A', 'score': 1},
-        {'text': '1000101011', 'score': 10},
-        {'text': '1010101010', 'score': 1},
-        {'text': '22C', 'score': 1},
-      ],
-    },
-  ];
-  var _questionIndex = 0;
-  var _totalScore = 0;
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) => MaterialApp(
+        title: 'Toggleswitch',
+        home: MyHomePage(),
+      );
+}
 
-  void _resetQuiz() {
-    setState(() {
-      _questionIndex = 0;
-      _totalScore = 0;
-    });
-  }
-
-  void _answerQuestion(int score) {
-    _totalScore += score;
-
-    setState(() {
-      _questionIndex = _questionIndex + 1;
-    });
-    print(_questionIndex);
-    if (_questionIndex < _questions.length) {
-      print('We have more questions!');
-    } else {
-      print('No more questions!');
-    }
-  }
+class MyHomePage extends StatefulWidget {
+  MyHomePage({
+    Key key,
+  }) : super(key: key);
 
   @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Scavenger Hunt 2'),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Align the Sequence'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            //By default
+            LiteRollingSwitch(
+              value: false,
+              textOn: '1',
+              textOff: '0',
+                iconOff: Icons.coronavirus_sharp,
+              onChanged: (bool state) {
+                print('turned ${(state) ? '1' : '0'}');
+              },
+            ),
+            LiteRollingSwitch(
+              value: false,
+              textOn: '1',
+              textOff: '0',
+                iconOff: Icons.coronavirus_sharp,
+              onChanged: (bool state) {
+                print('turned ${(state) ? '1' : '0'}');
+              },
+            ),
+            LiteRollingSwitch(
+              value: false,
+              textOn: '1',
+              textOff: '0',
+                iconOff: Icons.coronavirus_sharp,
+              onChanged: (bool state) {
+                print('turned ${(state) ? '1' : '0'}');
+              },
+            ),
+            LiteRollingSwitch(
+              value: false,
+              textOn: '1',
+              textOff: '0',
+                iconOff: Icons.coronavirus_sharp,
+              onChanged: (bool state) {
+                print('turned ${(state) ? '1' : '0'}');
+              },
+            ),
+            LiteRollingSwitch(
+              value: false,
+              textOn: '1',
+              textOff: '0',
+                iconOff: Icons.coronavirus_sharp,
+              onChanged: (bool state) {
+                print('turned ${(state) ? '1' : '0'}');
+              },
+            ),
+            LiteRollingSwitch(
+              value: false,
+              textOn: '1',
+              textOff: '0',
+                iconOff: Icons.coronavirus_sharp,
+              onChanged: (bool state) {
+                print('turned ${(state) ? '1' : '0'}');
+              },
+            ),
+            //Customized
+            Padding(
+              padding: EdgeInsets.only(top: 20),
+              child: LiteRollingSwitch(
+                value: true,
+                textOn: 'Yes',
+                textOff: 'No',
+                colorOn: Colors.deepOrange,
+                colorOff: Colors.blueGrey,
+                iconOn: Icons.lightbulb_outline,
+                iconOff: Icons.power_settings_new,
+                textSize: 18.0,
+                onChanged: (bool state) {
+                  print('turned ${(state) ? 'Yes' : 'No'}');
+                },
+              ),
+            )
+          ],
         ),
-        body: _questionIndex < 1
-            ? Quiz(
-                answerQuestion: _answerQuestion,
-                questionIndex: _questionIndex,
-                questions: _questions,
-              )
-            : _questionIndex < _questions.length
-                ? Quiz1(
-                    answerQuestion: _answerQuestion,
-                    questionIndex: _questionIndex,
-                    questions: _questions,
-                  )
-                : Result(_totalScore, _resetQuiz),
       ),
     );
   }
