@@ -1,0 +1,4 @@
+We will use this package as a library
+Add this to the package's pubspec.yaml file:
+dependencies:
+  lite_rolling_switch: ^0.1.1
